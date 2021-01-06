@@ -14,21 +14,20 @@ public class DateFormat {
 
         String pattern = "";
 
-        if (forSore){
+        if (forSore) {
             pattern = "yyMMddHHmmss";
-        }else {
+        } else {
             pattern = "dd.MM.yy в HH:mm";
         }
 
         try {
-            SimpleDateFormat fromFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.UK);
-            SimpleDateFormat toFormat = new SimpleDateFormat(pattern, Locale.UK);
+            SimpleDateFormat fromFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z",Locale.UK);
+            SimpleDateFormat toFormat = new SimpleDateFormat(pattern,Locale.UK);
             Date date = fromFormat.parse(dateToFormat);
             if (date != null) {
                 dateToFormat = toFormat.format(date);
             }
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
             Log.e("",e.getMessage());
         }
@@ -39,14 +38,13 @@ public class DateFormat {
     public static String getDate(String dateToFormat) {
 
         try {
-            SimpleDateFormat fromFormat = new SimpleDateFormat("yyMMddHHmmss", Locale.UK);
-            SimpleDateFormat toFormat = new SimpleDateFormat("dd.MM.yy в HH:mm", Locale.UK);
+            SimpleDateFormat fromFormat = new SimpleDateFormat("yyMMddHHmmss",Locale.UK);
+            SimpleDateFormat toFormat = new SimpleDateFormat("dd.MM.yy в HH:mm",Locale.UK);
             Date date = fromFormat.parse(dateToFormat);
             if (date != null) {
                 dateToFormat = toFormat.format(date);
             }
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
             Log.e("",e.getMessage());
         }

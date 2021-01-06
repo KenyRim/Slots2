@@ -16,7 +16,7 @@ public class NewsModel implements Serializable, Parcelable {
     public String description;
     public String pubDate;
 
-    public NewsModel(long id, String title, String source, String link, String guid, String enclosure, String description, String pubDate) {
+    public NewsModel(long id,String title,String source,String link,String guid,String enclosure,String description,String pubDate) {
         this.id = id;
         this.title = title;
         this.source = source;
@@ -120,7 +120,7 @@ public class NewsModel implements Serializable, Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel,int i) {
         parcel.writeLong(id);
         parcel.writeString(title);
         parcel.writeString(source);

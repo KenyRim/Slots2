@@ -1,4 +1,5 @@
 package com.appdev.slots2.utils;
+
 import android.util.*;
 import android.content.Context;
 import android.graphics.PointF;
@@ -15,12 +16,12 @@ public class SmoothScrollLM extends LinearLayoutManager {
         super(context);
     }
 
-    public SmoothScrollLM(Context context, int orientation, boolean reverseLayout) {
-        super(context, orientation, reverseLayout);
+    public SmoothScrollLM(Context context,int orientation,boolean reverseLayout) {
+        super(context,orientation,reverseLayout);
     }
 
-    public SmoothScrollLM(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+    public SmoothScrollLM(Context context,AttributeSet attrs,int defStyleAttr,int defStyleRes) {
+        super(context,attrs,defStyleAttr,defStyleRes);
     }
 
     @Override

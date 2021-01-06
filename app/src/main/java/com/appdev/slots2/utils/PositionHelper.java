@@ -40,7 +40,7 @@ public class PositionHelper {
      * there aren't any visible items.
      */
     public int findFirstVisibleItemPosition() {
-        final View child = findOneVisibleChild(0, layoutManager.getChildCount(), false, true);
+        final View child = findOneVisibleChild(0,layoutManager.getChildCount(),false,true);
         return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
     }
 
@@ -52,7 +52,7 @@ public class PositionHelper {
      * {@link RecyclerView#NO_POSITION} if there aren't any visible items.
      */
     public int findFirstCompletelyVisibleItemPosition() {
-        final View child = findOneVisibleChild(0, layoutManager.getChildCount(), true, false);
+        final View child = findOneVisibleChild(0,layoutManager.getChildCount(),true,false);
         return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
     }
 
@@ -64,7 +64,7 @@ public class PositionHelper {
      * there aren't any visible items
      */
     public int findLastVisibleItemPosition() {
-        final View child = findOneVisibleChild(layoutManager.getChildCount() - 1, -1, false, true);
+        final View child = findOneVisibleChild(layoutManager.getChildCount() - 1,-1,false,true);
         return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
     }
 
@@ -76,11 +76,11 @@ public class PositionHelper {
      * {@link RecyclerView#NO_POSITION} if there aren't any visible items.
      */
     public int findLastCompletelyVisibleItemPosition() {
-        final View child = findOneVisibleChild(layoutManager.getChildCount() - 1, -1, true, false);
+        final View child = findOneVisibleChild(layoutManager.getChildCount() - 1,-1,true,false);
         return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
     }
 
-    View findOneVisibleChild(int fromIndex, int toIndex, boolean completelyVisible,
+    View findOneVisibleChild(int fromIndex,int toIndex,boolean completelyVisible,
                              boolean acceptPartiallyVisible) {
         OrientationHelper helper;
         if (layoutManager.canScrollVertically()) {

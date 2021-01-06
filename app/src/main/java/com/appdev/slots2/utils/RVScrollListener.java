@@ -16,8 +16,8 @@ public abstract class RVScrollListener extends RecyclerView.OnScrollListener {
     PositionHelper mRecyclerViewHelper;
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        super.onScrolled(recyclerView, dx, dy);
+    public void onScrolled(RecyclerView recyclerView,int dx,int dy) {
+        super.onScrolled(recyclerView,dx,dy);
         mRecyclerViewHelper = PositionHelper.createHelper(recyclerView);
         visibleItemCount = recyclerView.getChildCount();
         totalItemCount = mRecyclerViewHelper.getItemCount();
@@ -30,7 +30,7 @@ public abstract class RVScrollListener extends RecyclerView.OnScrollListener {
             }
         }
         if (!loading && (totalItemCount - visibleItemCount)
-			<= (firstVisibleItem + visibleThreshold)) {
+                <= (firstVisibleItem + visibleThreshold)) {
             // End has been reached
             // Do something
             currentPage++;

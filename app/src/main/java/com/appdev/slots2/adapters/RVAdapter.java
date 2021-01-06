@@ -15,50 +15,48 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>
-{ 
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
 
 
-private Context context;
+    private Context context;
 
     private List<NewsModel> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public RVAdapter(Context context, List<NewsModel> data,ItemClickListener ItemClickListenermClickListener) {
+    public RVAdapter(Context context,List<NewsModel> data,ItemClickListener ItemClickListenermClickListener) {
         this.context = context;
-		this.mInflater = LayoutInflater.from(context);
-        this.mData = data; 
-		this.mClickListener = ItemClickListenermClickListener;
-		
-    } 
-	
-	
-	public void addNewData(List<NewsModel> data){
-	mData.clear(); 
-	mData = data; 
-	notifyDataSetChanged();
-	
-	}
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = data;
+        this.mClickListener = ItemClickListenermClickListener;
 
-	
-	
+    }
+
+
+    public void addNewData(List<NewsModel> data) {
+        mData.clear();
+        mData = data;
+        notifyDataSetChanged();
+
+    }
+
+
     // inflates the row layout from xml when needed
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.rv_item, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+        View view = mInflater.inflate(R.layout.rv_item,parent,false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder,int position) {
         NewsModel news = mData.get(position);
-        holder.tvTitle.setText(news.getTitle()); 
-		holder.tvText.setText(news.getDescription()); 
-		holder.tvDate.setText(news.getPubDate()); 
-		Glide.with(context).load(news.getEnclosure()).into(holder.photo);
+        holder.tvTitle.setText(news.getTitle());
+        holder.tvText.setText(news.getDescription());
+        holder.tvDate.setText(news.getPubDate());
+        Glide.with(context).load(news.getEnclosure()).into(holder.photo);
     }
 
     // total number of rows
@@ -70,26 +68,26 @@ private Context context;
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvTitle,tvText,tvDate; 
-		ImageView photo;
+        TextView tvTitle, tvText, tvDate;
+        ImageView photo;
 
         ViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.item_title);
-			tvText = itemView.findViewById(R.id.item_text); 
-			tvDate = itemView.findViewById(R.id.item_date); 
-			photo = itemView.findViewById(R.id.iv_item);
+            tvText = itemView.findViewById(R.id.item_text);
+            tvDate = itemView.findViewById(R.id.item_date);
+            photo = itemView.findViewById(R.id.iv_item);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null) mClickListener.onItemClick(view,getAdapterPosition());
         }
     }
 
     // convenience method for getting data at click position
-    
+
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {
@@ -98,6 +96,6 @@ private Context context;
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view,int position);
     }
 }
