@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SmoothScrollLM extends LinearLayoutManager {
 
-    private static final float MILLISECONDS_PER_INCH = 80f; //default is 25f (bigger = slower)
+    private static final float MILLISECONDS_PER_INCH = 100f; //default is 25f (bigger = slower)
 
     public SmoothScrollLM(Context context) {
         super(context);

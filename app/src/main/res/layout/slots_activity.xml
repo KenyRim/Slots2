@@ -23,14 +23,14 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="330dp"
+		android:layout_height="260dp"
 		android:gravity="center"
 		android:orientation="horizontal">
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/rv_slots_1"
 			android:layout_width="wrap_content"
-			android:layout_height="330dp"
+			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:background="@drawable/frame"
 			android:rotation="180"
@@ -39,16 +39,18 @@
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/rv_slots_2"
 			android:layout_width="wrap_content"
-			android:layout_height="330dp"
+			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:background="@drawable/frame"
 			android:rotation="180"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
 		/>
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/rv_slots_3"
 			android:layout_width="wrap_content"
-			android:layout_height="330dp"
+			android:layout_height="match_parent"
 			android:layout_gravity="center"
 			android:background="@drawable/frame"
 			android:rotation="180"
