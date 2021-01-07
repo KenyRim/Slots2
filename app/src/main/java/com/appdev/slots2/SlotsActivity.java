@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +28,15 @@ public class SlotsActivity extends AppCompatActivity
     private RecyclerView rv1, rv2, rv3;
     private SlotsRVAdapter adapter;
     private ArrayList<String> data;
-    private List<String> temp;
     private TextView tvResult;
     private SmoothScrollLM lm;
     private List<Integer> stateList = new ArrayList<>();
-    private String[] resultArr;
+    private List<String>
+            resultArr1 = new ArrayList<>(),
+            resultArr2 = new ArrayList<>(),
+            resultArr3 = new ArrayList<>();
+
+    private List<String> tempArr = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,6 @@ public class SlotsActivity extends AppCompatActivity
         btnSpin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                temp.clear();
                 stateList.clear();
                 tvResult.setText("");
 
@@ -87,10 +91,10 @@ public class SlotsActivity extends AppCompatActivity
 
         lm = new SmoothScrollLM(this);
         Collections.shuffle(data);
-        adapter = new SlotsRVAdapter(this,data,this);
+        adapter = new SlotsRVAdapter(this,data,this,rv.getId());
         rv.setLayoutManager(lm);
         rv.setAdapter(adapter);
-        rv.smoothScrollToPosition(3);
+        rv.smoothScrollToPosition(2);
 
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(rv);
@@ -99,62 +103,84 @@ public class SlotsActivity extends AppCompatActivity
 
     }
 
-    private void addListener(RecyclerView rv){
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView,int dx,int dy) {
-                super.onScrolled(recyclerView,dx,dy);
-            }
-
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView,int newState) {
-                super.onScrollStateChanged(recyclerView,newState);
-
-
-                if (newState == 0) {
-                    stateList.add(newState);
-                    Log.e("aaaaaaaaaaaa","size " + stateList.size());
-                    if (stateList.size() == 6){
-                        for (String word:resultArr) {
-                            Log.e("bbbbbbb","slot " + word);
-                        }
-
-
-                    }
-                }
-            }
-        });
-
-
-    }
-
     private int getCurrentItem(RecyclerView rv) {
         return ((LinearLayoutManager) rv.getLayoutManager())
                 .findFirstVisibleItemPosition();
     }
 
+
+    //-Получение результата
+
     @Override
-    public void getScrollResult(List<String> result,int position) {
-        tvResult.setText("");
-        temp = result;
+    public void getScrollResult1(List<String> result,int position) {
+        resultArr1 = result;
+    }
 
-        for (int i = 0; i < result.size() - 2; i++) {
-            if (i > result.size() - 6) {
-                String resultString = tvResult.getText() + " " + temp.get(i);
-                tvResult.setText(resultString);
+    @Override
+    public void getScrollResult2(List<String> result,int position) {
+        resultArr2 = result;
+    }
 
-                resultArr = resultString.split("\\s+");
-                for (int i1 = 0; i1 < resultArr.length; i1++) {
+    @Override
+    public void getScrollResult3(List<String> result,int position) {
+        resultArr3 = result;
+    }
 
-                    Log.e("","");
-                    if(resultArr[i1].length()>0 && !resultArr[i1].isEmpty()) {
-                        resultArr[i1] = resultArr[i1].replaceAll("[^\\w]","");
+    //-Дожидаемся остановки скроллинга
+
+    private void addListener(RecyclerView rv) {
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView,int newState) {
+                super.onScrollStateChanged(recyclerView,newState);
+
+                if (newState == 0) {
+                    stateList.add(newState);
+                    if (stateList.size() == 6) {
+                        workWithResult();
                     }
                 }
+
             }
-        }
+        });
+
+    }
+
+    //-Обработка ркзультата
+
+    private void workWithResult() {
+
+        finalCut(resultArr1);
+        finalCut(resultArr2);
+        finalCut(resultArr3);
+
+        tvResult.setText("ряд1: "+
+                resultArr1.get(0)+" - "+
+                resultArr1.get(1)+" - "+
+                resultArr1.get(2)+"\n"+
+                "ряд2: "+
+                resultArr2.get(0)+" - "+
+                resultArr2.get(1)+" - "+
+                resultArr2.get(2)+"\n"+
+                "ряд2: "+
+                resultArr3.get(0)+" - "+
+                resultArr3.get(1)+" - "+
+                resultArr3.get(2)
+        );
+
+    }
+
+    private void finalCut(List<String> resultArr){
+        tempArr.addAll(resultArr);
+        resultArr.clear();
+        resultArr.add(0,tempArr.get(tempArr.size() - 3));
+        resultArr.add(1,tempArr.get(tempArr.size() - 4));
+        resultArr.add(2,tempArr.get(tempArr.size() - 5));
+        tempArr.clear();
     }
 
 
 }
+
 
