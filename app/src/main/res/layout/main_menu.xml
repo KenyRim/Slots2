@@ -15,8 +15,14 @@
 	<Button
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Новое активити"
+		android:text="demo game"
 		android:id="@+id/btn_slots"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="piano"
+        android:id="@+id/btn_piano"/>
 	
 </LinearLayout>
 
